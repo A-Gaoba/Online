@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Subject {
+  id        Int       @id @default(autoincrement())
+  subName   String
+  subCode   String
+  sessions  String
+  Classes   Class[] // Referring to the classes where this subject is taught
+  teachers  Teacher[] // Referring to the teachers who teach this subject
+  admin     Admin[] // Referring to admins managing this subject
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Admin {
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String    @unique
+  password   String
+  role       Role      @default(Admin)
+  schoolName String    @unique
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  subjects   Subject[] // Referring to subjects managed by this admin
+  Classes    Class[] // Referring to classes managed by this admin
+  students   Student[] // Referring to students managed by this admin
+  teachers   Teacher[] // Referring to teachers managed by this admin
+}
+
+model Class {
+  id        Int       @id @default(autoincrement())
+  ClassName String
+  school    Admin     @relation(fields: [schoolId], references: [id])
+  schoolId  Int
+  subjects  Subject[] // Referring to subjects taught in this class
+  students  Student[] // Referring to students in this class
+  teachers  Teacher[] // Referring to teachers teaching in this class
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Student {
+  id        Int      @id @default(autoincrement())
+  name      String
+  rollNum   Int
+  password  String
+  Class     Class    @relation(fields: [ClassId], references: [id])
+  ClassId   Int
+  school    Admin    @relation(fields: [schoolId], references: [id])
+  schoolId  Int
+  role      Role     @default(Student)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Teacher {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  password  String
+  role      Role      @default(Teacher)
+  school    Admin     @relation(fields: [schoolId], references: [id])
+  schoolId  Int
+  subjects  Subject[] // Referring to subjects taught by this teacher
+  classes   Class[] // Referring to classes taught by this teacher
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+enum Role {
+  Admin
+  Student
+  Teacher
+}

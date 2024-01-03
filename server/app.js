@@ -2,26 +2,22 @@ const express = require("express");
 const adminRoutes = require("./src/routes/adminRoutes");
 const app = express();
 
-// Middleware to parse JSON request bodies
-app.use(express.json());
-app.use(express.urlencoded());
+function createApp() {
+  app.use(express.json());
+  app.use(express.urlencoded());
 
-// Mounting admin routes
-app.use("/api", adminRoutes);
+  app.use("/api", adminRoutes);
+  app.get("/", (req, res) => {
+    res.send("Welcome to the API");
+  });
 
-// Example default route
-app.get("/", (req, res) => {
-  res.send("Welcome to the API");
-});
+  // Error handling middleware
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+  });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
+  return app;
+}
 
-// Starting the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+module.exports = createApp;

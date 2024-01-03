@@ -1,5 +1,6 @@
 const express = require("express");
 const adminRoutes = require("./src/routes/adminRoutes");
+const swagger = require("./docs/swagger");
 const app = express();
 
 function createApp() {
@@ -17,6 +18,7 @@ function createApp() {
     res.status(500).send("Something broke!");
   });
 
+  swagger(app);
   return app;
 }
 

@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 // Function to create a new admin
 const createAdmin = async (req, res) => {
-  // console.log(req.body)
+  console.log(req.body);
   try {
     const { name, email, password, schoolName } = req.body;
     const newAdmin = await prisma.admin.create({
@@ -27,7 +27,9 @@ const createAdmin = async (req, res) => {
 
 const getAllAdmins = async (req, res) => {
   try {
-    const admins = await prisma.admin.findMany(); // Retrieve all admins
+    const admins = await prisma.admin.findMany();
+
+    console.log(admins);
     res.status(200).json(admins);
   } catch (error) {
     res

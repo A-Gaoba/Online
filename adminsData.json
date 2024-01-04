@@ -1,0 +1,42 @@
+[
+  {
+    "id": 50,
+    "name": "amr",
+    "email": "amr@mail.com",
+    "password": "1231",
+    "role": "Admin",
+    "schoolName": "amr",
+    "createdAt": "2024-01-04T12:12:44.814Z",
+    "updatedAt": "2024-01-04T12:12:44.814Z"
+  },
+  {
+    "id": 43,
+    "name": "UpdatedName",
+    "email": "updatedemail@gmail.com",
+    "password": "updated_password",
+    "role": "Admin",
+    "schoolName": "updated school name",
+    "createdAt": "2024-01-03T21:08:26.214Z",
+    "updatedAt": "2024-01-03T21:08:26.222Z"
+  },
+  {
+    "id": 44,
+    "name": "eskander",
+    "email": "gaoba@mail.com",
+    "password": "1233",
+    "role": "Admin",
+    "schoolName": "Nahda",
+    "createdAt": "2024-01-04T12:03:21.634Z",
+    "updatedAt": "2024-01-04T12:03:21.634Z"
+  },
+  {
+    "id": 49,
+    "name": "gaoba",
+    "email": "esk@mail.com",
+    "password": "123",
+    "role": "Admin",
+    "schoolName": "Nsdljf",
+    "createdAt": "2024-01-04T12:03:55.157Z",
+    "updatedAt": "2024-01-04T12:03:55.157Z"
+  }
+]

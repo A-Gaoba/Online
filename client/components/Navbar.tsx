@@ -94,12 +94,14 @@ const Navbar = () => {
 
       {/* Login Button */}
       <div className="lg:flexCenter hidden">
-        <Button
-          type="button"
-          title="login"
-          icon="/user.svg"
-          variant="btn_green"
-        />
+        <Link href="/register">
+          <Button
+            type="button"
+            title="Login"
+            icon="/user.svg"
+            variant="btn_green"
+          />
+        </Link>
       </div>
     </nav>
   );
